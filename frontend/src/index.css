@@ -1,0 +1,292 @@
+:root {
+  --primary-color: #3A0CA3;
+  /* Deep Indigo - Govt Standard */
+  --accent-color: #00B4D8;
+  /* Electric Blue - Tech/Voice */
+  --secondary-color: #64748B;
+  --saffron: #FF9933;
+  /* Indian Flag Saffron */
+  --green: #138808;
+  /* Indian Flag Green */
+  --bg-color: #F9FAFB;
+  --text-main: #1A1A1A;
+  --text-light: #4B5563;
+  --border-radius: 4px;
+  /* More formal squared edges */
+  --header-height: 85px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', 'Noto Sans', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(180deg, #F5F7FF 0%, #FFFFFF 100%);
+  color: var(--text-main);
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--primary-color);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: all 0.2s ease;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.container {
+  max-width: 1360px;
+  /* Standard wide screen */
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* --- Top Header --- */
+.gov-header {
+  background: white;
+  height: var(--header-height);
+  border-bottom: 3px solid var(--saffron);
+  /* Saffron Line */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* --- Typography Helpers --- */
+.text-bold {
+  font-weight: 700;
+}
+
+.text-gov {
+  font-family: 'Times New Roman', serif;
+  /* Classic Gov feel for emblems */
+}
+
+/* --- Buttons --- */
+.btn-primary {
+  background: linear-gradient(135deg, #00B4D8 0%, #0096B4 100%);
+  color: white;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  /* Rounded for voice feel */
+  box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 180, 216, 0.4);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  /* Squared for login/admin */
+}
+
+.btn-secondary:hover {
+  background: #F0F4FF;
+}
+
+/* --- Service Ribbon --- */
+.service-ribbon {
+  background: white;
+  border-bottom: 1px solid #E5E7EB;
+  padding: 15px 0;
+  position: relative;
+}
+
+/* --- 3-Col Layout --- */
+.gov-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  /* strict 3-col */
+  gap: 25px;
+  padding: 30px 0;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .gov-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Cards Standard --- */
+.gov-card {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s;
+}
+
+.gov-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  background: #F8FAFB;
+  padding: 12px 15px;
+  border-bottom: 1px solid #E5E7EB;
+  font-weight: 700;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* --- Notice Board List --- */
+.notice-list {
+  list-style: none;
+}
+
+.notice-item {
+  padding: 12px 15px;
+  border-bottom: 1px solid #F3F4F6;
+  font-size: 0.9rem;
+  color: #374151;
+  display: flex;
+  gap: 10px;
+}
+
+.notice-item:last-child {
+  border-bottom: none;
+}
+
+.notice-icon {
+  color: var(--accent-color);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* --- Quick Links --- */
+.link-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 15px;
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-left: 4px solid var(--accent-color);
+  /* Blue accent border */
+  margin-bottom: 10px;
+  border-radius: 4px;
+  color: #374151;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.link-box:hover {
+  background: #F0F9FF;
+  padding-left: 20px;
+  /* Slight movement */
+}
+
+/* --- Hero --- */
+.hero-center {
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Feature Cards (Horizontal) --- */
+.feature-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.feature-box {
+  background: white;
+  padding: 20px;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.feature-box:hover {
+  background: #FAFAFA;
+  border-color: var(--accent-color);
+}
+
+/* --- FAB --- */
+.voice-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2000;
+}
+
+.fab-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 180, 216, 0.5);
+  animation: pulse-glow 2.5s infinite;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 180, 216, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(0, 180, 216, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 180, 216, 0);
+  }
+}
