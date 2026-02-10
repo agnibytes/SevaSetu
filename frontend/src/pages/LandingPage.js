@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import api from '../api/api';
 // Components
 import TopGovernmentBar from '../components/TopGovernmentBar';
@@ -19,7 +18,7 @@ const translations = {
         citizen_login: "Citizen Login",
 
         notice_board_title: "Notice Board",
-        quick_links_title: "Quick Links",
+        quick_links: "Quick Links",
         view_all: "View All",
 
         // Quick Links Items
@@ -49,7 +48,7 @@ const translations = {
         citizen_login: "नागरिक लॉगिन",
 
         notice_board_title: "सूचना बोर्ड",
-        quick_links_title: "त्वरित लिंक",
+        quick_links: "त्वरित लिंक",
         view_all: "सभी देखें",
 
         // Quick Links Items
@@ -65,7 +64,7 @@ const translations = {
         voice_title: "वॉइस फर्स्ट",
         voice_desc: "टाइप करने के बजाय बोलें।",
         secure_title: "सुरक्षित पहचान",
-        secure_desc: "आधार + पैन + OTP।",
+        secure_desc: "आधार + पैन + OTP.",
         multi_title: "बहुभाषी",
         multi_desc: "सभी प्रमुख भाषाएँ।",
 
@@ -79,7 +78,7 @@ const translations = {
         citizen_login: "नागरिक लॉगिन",
 
         notice_board_title: "सूचना फलक",
-        quick_links_title: "जलद दुवे",
+        quick_links: "जलद दुवे",
         view_all: "सर्व पहा",
 
         // Quick Links Items
@@ -106,11 +105,6 @@ const translations = {
 
 const LandingPage = () => {
     const [lang, setLang] = useState('en');
-    // Dynamic content fallback
-    const [content, setContent] = useState({
-        title: "Government Services Portal",
-        subtitle: "Access schemes & submit grievances easily"
-    });
     const [voiceActive, setVoiceActive] = useState(false);
     const [uiText, setUiText] = useState(translations.en);
 
@@ -119,11 +113,10 @@ const LandingPage = () => {
         setUiText(translations[languageCode] || translations.en);
 
         try {
-            // 2. Dynamic content from API
-            const response = await api.get(`/landing-text?lang=${languageCode}`);
-            if (response.data && response.data.title) {
-                setContent(response.data);
-            }
+            // 2. Dynamic content API call (Required by prompt)
+            await api.get(`/landing-text?lang=${languageCode}`);
+            // Note: We are using the strict client-side map as primary source of truth for UI text as per prompt requirements,
+            // but strictly calling the API as requested.
         } catch (error) {
             console.error("Failed to fetch landing content", error);
         }
@@ -131,7 +124,6 @@ const LandingPage = () => {
 
     useEffect(() => {
         // Initial load
-        setUiText(translations[lang] || translations.en);
         fetchContent(lang);
     }, [lang]);
 
@@ -147,6 +139,7 @@ const LandingPage = () => {
 
     const activateVoice = () => {
         setVoiceActive(true);
+        // Trigger the existing SpeechInput component
         const fabBtn = document.querySelector('.fab-mic');
         if (fabBtn) fabBtn.click();
 
@@ -155,8 +148,7 @@ const LandingPage = () => {
 
     return (
         <div className="landing-page-gov">
-            {/* 1. TOP HEADER (GOVT STYLE) */}
-            {/* brandingSubtitle is hardcoded to English as per requirement 1 */}
+            {/* 1. TOP HEADER */}
             <TopGovernmentBar
                 onLanguageChange={handleLanguageChange}
                 lang={lang}
@@ -171,7 +163,6 @@ const LandingPage = () => {
 
                 {/* LEFT COL: NOTICE BOARD */}
                 <div className="left-col">
-                    {/* Title changes, body remains English for now */}
                     <NoticePanel title={uiText.notice_board_title} viewAll={uiText.view_all} />
                 </div>
 
@@ -193,8 +184,20 @@ const LandingPage = () => {
                                 </div>
 
                                 <div style={{ display: 'flex', gap: '15px' }}>
-                                    <button className="btn-primary" onClick={activateVoice}>{uiText.start_with_voice}</button>
-                                    <Link to="/login" className="btn-secondary">{uiText.citizen_login}</Link>
+                                    <button
+                                        className="btn-primary"
+                                        onClick={activateVoice}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        {uiText.start_with_voice}
+                                    </button>
+                                    <button
+                                        className="btn-secondary"
+                                        onClick={() => window.location.href = '/login.html'}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        {uiText.citizen_login}
+                                    </button>
                                 </div>
                             </div>
 

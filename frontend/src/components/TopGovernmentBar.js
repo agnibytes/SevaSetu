@@ -35,7 +35,11 @@ const TopGovernmentBar = ({ onLanguageChange, lang, brandingSubtitle }) => {
                     <LanguageSelector onLanguageChange={onLanguageChange} />
 
                     {/* Login CTA */}
-                    <button className="btn-primary" style={{ padding: '10px 20px', fontSize: '0.9rem', borderRadius: '4px', background: '#3A0CA3', boxShadow: 'none' }}>
+                    <button
+                        className="btn-primary"
+                        onClick={() => window.location.href = '/login.html'}
+                        style={{ padding: '10px 20px', fontSize: '0.9rem', borderRadius: '4px', background: '#3A0CA3', boxShadow: 'none' }}
+                    >
                         <User size={16} />
                         Login
                     </button>
