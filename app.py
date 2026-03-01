@@ -9,7 +9,8 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-app.config["AIzaSyCd_6SjNNXkDZuaAqaXuhz_Ye-2gLtKMDI"] = os.getenv("AIzaSyCd_6SjNNXkDZuaAqaXuhz_Ye-2gLtKMDI")
+
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret-key")
 
 # =================================================
 # DATABASE
@@ -32,13 +33,14 @@ grievances = db["grievances"]
 def authenticate():
     token = request.headers.get("Authorization", "").replace("Bearer ", "")
     try:
-        return jwt.decode(token, app.config["AIzaSyCd_6SjNNXkDZuaAqaXuhz_Ye-2gLtKMDI"], algorithms=["HS256"])
+        return jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])
     except:
         return None
 
-# =================================================
-# LANDING PAGE
-# =================================================
+@app.route("/")
+def index():
+    return jsonify({"message": "SevaSetu API is running", "status": "ok"})
+
 @app.route("/languages")
 def languages():
     return jsonify([
@@ -280,7 +282,7 @@ def text_to_speech():
 # RUN SERVER
 # =================================================
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
 
 
 

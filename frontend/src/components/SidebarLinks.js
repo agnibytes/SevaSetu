@@ -1,17 +1,17 @@
-import React from 'react';
 import { ChevronRight, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const SidebarLinks = ({ translations }) => {
     const t = translations || {};
 
     const links = [
-        { label: t.new_applicant_registration || "New Applicant Registration", to: "/register.html" },
-        { label: t.applicant_login || "Applicant Login", to: "/login.html" },
-        { label: t.find_eligible_schemes || "Find Eligible Schemes", to: "/schemes.html" },
-        { label: t.institute_login || "Institute / Dept / DDO Login", to: "/institute-login.html" },
-        { label: t.grievance || "Grievance / Suggestions", to: "/grievance.html" },
-        { label: t.user_manuals || "User Manuals", to: "/manuals.html" },
-        { label: t.faq || "Frequently Asked Questions", to: "/faq.html" }
+        { label: t.new_applicant_registration || "New Applicant Registration", to: "/register" },
+        { label: t.applicant_login || "Applicant Login", to: "/login" },
+        { label: t.find_eligible_schemes || "Find Eligible Schemes", to: "/schemes" },
+        { label: t.institute_login || "Institute / Dept / DDO Login", to: "/institute-login" },
+        { label: t.grievance || "Grievance / Suggestions", to: "/grievance" },
+        { label: t.user_manuals || "User Manuals", to: "/manuals" },
+        { label: t.faq || "Frequently Asked Questions", to: "/faq" }
     ];
 
     return (
@@ -21,15 +21,15 @@ const SidebarLinks = ({ translations }) => {
             </div>
 
             {links.map((link, i) => (
-                <a
+                <Link
                     key={i}
-                    href={link.to}
+                    to={link.to}
                     className="link-box"
                     style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
                 >
                     {link.label}
                     <ArrowRight size={16} color="#00B4D8" />
-                </a>
+                </Link>
             ))}
 
         </div>

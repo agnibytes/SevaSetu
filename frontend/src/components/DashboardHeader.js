@@ -3,7 +3,7 @@ import LanguageSelector from './LanguageSelector';
 import { User, LogOut, Settings, FileText, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const DashboardHeader = ({ onLanguageChange, lang }) => {
+const DashboardHeader = ({ onLanguageChange, lang, dashboardTitle = "Citizen Dashboard" }) => {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
     return (
@@ -18,13 +18,39 @@ const DashboardHeader = ({ onLanguageChange, lang }) => {
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <h1 style={{ fontSize: '1.5rem', color: '#1A1A1A', margin: 0, lineHeight: 1 }}>SevaSetu</h1>
                         <span style={{ fontSize: '0.9rem', color: '#666', fontWeight: 500 }}>
-                            Citizen Dashboard
+                            {dashboardTitle}
                         </span>
                     </div>
                 </div>
 
                 {/* RIGHT: Tools */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+
+                    {/* Quick Language Toggle */}
+                    <div style={{ display: 'flex', gap: '5px' }}>
+                        {[
+                            { code: 'en', label: 'EN' },
+                            { code: 'hi', label: 'HI' },
+                            { code: 'mr', label: 'MR' }
+                        ].map((l) => (
+                            <button
+                                key={l.code}
+                                onClick={() => onLanguageChange(l.code)}
+                                style={{
+                                    padding: '5px 10px',
+                                    fontSize: '12px',
+                                    borderRadius: '4px',
+                                    border: '1px solid #ddd',
+                                    background: lang === l.code ? '#3A0CA3' : 'white',
+                                    color: lang === l.code ? 'white' : '#333',
+                                    cursor: 'pointer',
+                                    fontWeight: 600
+                                }}
+                            >
+                                {l.label}
+                            </button>
+                        ))}
+                    </div>
 
                     <LanguageSelector onLanguageChange={onLanguageChange} />
 

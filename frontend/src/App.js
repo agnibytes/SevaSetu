@@ -5,7 +5,8 @@ import LoginPage from './pages/LoginPage';
 import RegisterBasic from './pages/RegisterBasic';
 import RegisterIdentity from './pages/RegisterIdentity';
 import OTPVerify from './pages/OTPVerify';
-import Dashboard from './pages/Dashboard'; // Added import for Dashboard
+import Dashboard from './pages/Dashboard';
+import SchemesPage from './pages/SchemesPage';
 import './index.css';
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
                     <Route path="/register" element={<RegisterBasic />} />
                     <Route path="/register/identity" element={<RegisterIdentity />} />
                     <Route path="/register/otp" element={<OTPVerify />} />
-                    <Route path="/dashboard" element={<Dashboard />} /> {/* Added route for Dashboard */}
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/schemes" element={<SchemesPage />} />
                 </Routes>
             </div>
         </Router>

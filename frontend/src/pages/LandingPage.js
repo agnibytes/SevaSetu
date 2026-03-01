@@ -193,7 +193,7 @@ const LandingPage = () => {
                                     </button>
                                     <button
                                         className="btn-secondary"
-                                        onClick={() => window.location.href = '/login.html'}
+                                        onClick={() => window.location.href = '/login'}
                                         style={{ cursor: 'pointer' }}
                                     >
                                         {uiText.citizen_login}

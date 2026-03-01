@@ -15,23 +15,35 @@ const DashboardSidebar = () => {
     return (
         <div className="gov-card" style={{ padding: '15px', background: 'white' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                {navItems.map((item, index) => (
-                    <div
-                        key={index}
-                        style={{
-                            display: 'flex', alignItems: 'center', gap: '12px',
-                            padding: '12px 15px', borderRadius: '6px',
-                            cursor: 'pointer',
-                            background: item.active ? '#EEF2FF' : 'transparent',
-                            color: item.active ? '#3A0CA3' : '#4B5563',
-                            fontWeight: item.active ? '600' : '500',
-                            borderLeft: item.active ? '4px solid #3A0CA3' : '4px solid transparent'
-                        }}
-                    >
-                        <item.icon size={20} />
-                        <span>{item.label}</span>
-                    </div>
-                ))}
+                {navItems.map((item, index) => {
+                    const content = (
+                        <div
+                            key={index}
+                            style={{
+                                display: 'flex', alignItems: 'center', gap: '12px',
+                                padding: '12px 15px', borderRadius: '6px',
+                                cursor: 'pointer',
+                                background: item.active ? '#EEF2FF' : 'transparent',
+                                color: item.active ? '#3A0CA3' : '#4B5563',
+                                fontWeight: item.active ? '600' : '500',
+                                borderLeft: item.active ? '4px solid #3A0CA3' : '4px solid transparent',
+                                width: '100%'
+                            }}
+                        >
+                            <item.icon size={20} />
+                            <span>{item.label}</span>
+                        </div>
+                    );
+
+                    if (item.label === "Apply for Schemes") {
+                        return <Link key={index} to="/schemes" style={{ textDecoration: 'none' }}>{content}</Link>;
+                    }
+                    if (item.label === "Dashboard") {
+                        return <Link key={index} to="/dashboard" style={{ textDecoration: 'none' }}>{content}</Link>;
+                    }
+
+                    return <div key={index}>{content}</div>;
+                })}
 
                 <div style={{ borderTop: '1px solid #eee', margin: '10px 0' }}></div>
 
